@@ -257,7 +257,7 @@ interface Story {
   colour: RGB;
   headline: string;
   caption: string;
-  icon: 'chip' | 'satellite' | 'scales' | 'building' | 'globe' | 'virus';
+  icon: 'chip' | 'satellite' | 'scales' | 'building' | 'globe' | 'virus' | 'quake';
 }
 
 const STORIES: Story[] = [
@@ -290,17 +290,17 @@ const STORIES: Story[] = [
     icon: 'building',
   },
   {
-    kicker: 'CLIMATE',
+    kicker: 'QUAKE',
     colour: [21, 128, 61],
-    headline: 'COP31 ENDS WITH NO DEAL',
-    caption: 'THE UN CLIMATE SUMMIT CLOSES WITHOUT AGREEMENT AS TALKS SPLIT OVER FOSSIL FUELS.',
-    icon: 'globe',
+    headline: 'QUAKE HITS NEPAL NEAR CHINA BORDER',
+    caption: 'A 5.6 MAGNITUDE EARTHQUAKE STRIKES KOSHI PROVINCE IN NEPAL, NEAR THE BORDER WITH CHINA.',
+    icon: 'quake',
   },
   {
     kicker: 'HEALTH',
     colour: [194, 65, 12],
-    headline: 'US LOSES MEASLES-FREE STATUS',
-    caption: 'AMERICA LOSES ITS MEASLES ELIMINATION STATUS AFTER MORE THAN 25 YEARS.',
+    headline: 'PENNSYLVANIA MEASLES DEATH TOLL HITS NINE',
+    caption: 'PENNSYLVANIA REPORTS A NINTH DEATH IN THE MEASLES OUTBREAK SPREADING ACROSS 46 COUNTIES.',
     icon: 'virus',
   },
 ];
@@ -367,6 +367,18 @@ function drawIcon(kind: Story['icon'], x: number, y: number, c: RGB): void {
     }
     fillCircle(x + 66, y + 12, 7, [21, 128, 61]);
     line(x + 66, y + 12, x + 74, y + 4, 2, [21, 128, 61]);
+  } else if (kind === 'quake') {
+    // Seismograph trace: flat baseline with two sharp spikes.
+    hline(x + 8, x + 76, y + 62, c);
+    line(x + 10, y + 62, x + 20, y + 62, 3, c);
+    line(x + 20, y + 62, x + 26, y + 30, 3, c);
+    line(x + 26, y + 30, x + 32, y + 72, 3, c);
+    line(x + 32, y + 72, x + 38, y + 48, 3, c);
+    line(x + 38, y + 48, x + 46, y + 62, 3, c);
+    line(x + 46, y + 62, x + 54, y + 62, 3, c);
+    line(x + 54, y + 62, x + 60, y + 40, 3, c);
+    line(x + 60, y + 40, x + 66, y + 62, 3, c);
+    line(x + 66, y + 62, x + 76, y + 62, 3, c);
   } else if (kind === 'virus') {
     for (let a = 0; a < 8; a++) {
       const rad = (a * Math.PI) / 4;
